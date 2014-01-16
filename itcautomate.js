@@ -3,7 +3,7 @@ var page = require( 'webpage' ).create();
 var state = "login"; // use this to keep track of the state-machine-like state that we are expecting to be in
 var step = 0;
 
-var appName, appSKU, bundleID, appSKU, version;
+var appName, appSKU, bundleID, version;
 
 // load args:
 for ( var i = 1; i < system.args.length; i++ ) { // start at 1 to skip binary name

@@ -230,7 +230,7 @@ function processState() {
 				return page.evaluate( function() {
 					var link = $("label:contains('App Store Territory')").parent().find("select").first();
 					return link.is(":visible");
-				});
+				}, 10000);
 			}, function() {
 				
 				state = page.evaluate( function(firstName, lastName, sandboxUserEmail, sandboxUserPassword, secretQuestion, secretAnswer, birthMonth, birthDay, appStoreTerritory ) {
@@ -272,8 +272,10 @@ function processState() {
 				}, firstName, lastName, sandboxUserEmail, sandboxUserPassword, secretQuestion, secretAnswer, birthMonth, birthDay, appStoreTerritory );
 				window.setTimeout(function() {
 					page.render( imageName );
-					phantom.exit(0);
-				}, 2000);
+					window.setTimeout(function() {
+						phantom.exit(0);
+					}, 500);
+				}, 5000);
 				
 			});
 		break;
@@ -288,12 +290,12 @@ function processState() {
 
 		default:
 		case "end":
-			state = "abort";
+			state = "end";
 		break;
 	}
 
-	if ( state == "abort" )
-		phantom.exit();
+	//if ( state == "abort" )
+		//phantom.exit();
 }
 
 page.onConsoleMessage = function( message ) {
